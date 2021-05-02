@@ -1,0 +1,46 @@
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url.defaultZone: "http://localhost:7001/eureka/"
+  instance:
+    appname: eureka-consumer
+
+server:
+  port: 91
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+    shutdown:
+      enabled: true
+spring:
+  application:
+    name: eureka-consumer
+  zipkin:
+    base-url: "http://localhost:9411/"
+    sleuth:
+      sampler:
+        rate: 1
+
+
+logging:
+  level.com.chinaliyq.eurekaconsumer: debug
+
+
+
+ribbon.ConnectTimeout: 100
+ribbon.ReadTimeout: 6000
+
+#同一台实例最大重试次数,不包括首次调用
+ribbon.MaxAutoRetries: 3
+#重试负载均衡其他的实例最大重试次数,不包括首次调用
+ribbon.MaxAutoRetriesNextServer: 3
+  #是否所有操作都重试
+ribbon.OkToRetryOnAllOperations: false
+

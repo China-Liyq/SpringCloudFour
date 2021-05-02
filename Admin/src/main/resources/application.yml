@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: admin
+  mail:
+    host: smtp.qq.com
+    username: "908337205@qq.com"
+    password: "aisyskgacgbhbbhj"
+    properties:
+      mail:
+        smpt:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+
+  boot:
+    admin:
+      notify:
+        mail:
+          to: 908337205@qq.com
+          from: 908337205@qq.com
+server:
+  port: 8080
+
+

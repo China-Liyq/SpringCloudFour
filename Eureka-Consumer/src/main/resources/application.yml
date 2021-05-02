@@ -1,0 +1,59 @@
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url.defaultZone: "http://localhost:7001/eureka/"
+  instance:
+    appname: eureka-consumer
+
+server:
+  port: 90
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+    shutdown:
+      enabled: true
+spring:
+  application:
+    name: eureka-consumer
+  zipkin:
+    base-url: "http://localhost:9411/"
+    sleuth:
+      sampler:
+        rate: 1
+  boot:
+    admin:
+      client:
+        url: "http://localhost:8080"
+
+logging:
+  level.com.chinaliyq.eurekaconsumer: debug
+
+#使用信号量,默认使用的是线程模式
+#hystrix.command.default.execution.isolation.strategy: SEMAPHORE
+
+
+ribbon.ConnectTimeout: 1000
+ribbon.ReadTimeout: 6000
+
+#同一台实例最大重试次数,不包括首次调用
+ribbon.MaxAutoRetries: 2
+#重试负载均衡其他的实例最大重试次数,不包括首次调用
+ribbon.MaxAutoRetriesNextServer: 2
+#是否所有操作都重试
+ribbon.OkToRetryOnAllOperations: false
+
+feign:
+  hystrix:
+    enabled: true
+#将ip名称加入dashboard
+hystrix:
+  dashboard:
+    proxy-stream-allow-list: "localhost"
+
